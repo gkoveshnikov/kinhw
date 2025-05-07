@@ -1,7 +1,9 @@
+#include <yaml-cpp/yaml.h>
 #include <eigen3/Eigen/Dense>
 #include <eigen3/Eigen/src/Core/Matrix.h>
 #include <fstream>
 #include <functional>
+#include <filesystem>
 #include "calc.h"
 #include "bloch_rhs.h"
 
@@ -14,9 +16,19 @@ int main() {
   double T_parallel = 1 / (4 * b);
   double T_perp = 1 / (2 * a + 2 * b);
 
-  Eigen::Vector3d n (1.0, 0.0, 0.0);
-  double dt = 0.01, tmax = 10.0;
-  std::ofstream fout("bloch.csv");
+  YAML::Node config = YAML::LoadFile("./config/base.yaml");
+
+  double nx = config["magnetic"]["nx"].as<double>();
+  double ny = config["magnetic"]["ny"].as<double>();
+  double nz = config["magnetic"]["nz"].as<double>();
+  double dt = config["general"]["dt"].as<double>();
+  double tmax = config["general"]["tmax"].as<double>();
+
+  Eigen::Vector3d n(nx, ny, nz);
+
+  auto filePath = std::filesystem::current_path()//.parent_path() 
+    / "output" / "config.csv";
+  std::ofstream fout(filePath);
   
   fout << "# t,nx,ny,nz\n";
   std::function<Eigen::Vector3d(Eigen::Vector3d,double)> func 

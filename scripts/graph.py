@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 
-df = pd.read_csv(sys.argv[1])
+df = pd.read_csv("./output/data.csv")
 
 nx = df["nx"]
 ny = df["ny"]

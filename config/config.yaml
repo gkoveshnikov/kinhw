@@ -1,0 +1,7 @@
+general:
+  dt: 0.01
+  tmax: 10.0
+magnetic:
+  nx: 1.0
+  ny: 0.0
+  nz: 0.0

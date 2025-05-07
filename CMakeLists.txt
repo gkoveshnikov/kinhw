@@ -11,14 +11,18 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 file(GLOB_RECURSE SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp)
 add_executable(${PROJECT_NAME} ${SOURCES})
 
+# add yaml support for config files
+find_package(yaml-cpp REQUIRED)
 
 # add eigen
 find_package(Eigen3 3.3 REQUIRED NO_MODULE)
+
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${EIGEN3_INCLUDE_DIRS}
 )
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(${PROJECT_NAME} PRIVATE
     Eigen3::Eigen 
+    yaml-cpp
 )
 
 # Custom flags for Debug
@@ -32,7 +36,7 @@ set(DEBUG_FLAGS
 
 set(DEBUG_SANITIZERS 
     -fsanitize=undefined
-    -fsanitize=address
+    #-fsanitize=address
     -fno-sanitize-recover=all
 )
 
