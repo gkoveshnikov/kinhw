@@ -1,6 +1,6 @@
 #include "bloch_rhs.h"
-#include <eigen3/Eigen/Dense>
-#include <eigen3/Eigen/src/Core/Matrix.h>
+#include <Eigen/Dense>
+#include <Eigen/src/Core/Matrix.h>
 
 namespace bloch_rhs {
 

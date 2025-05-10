@@ -3,7 +3,8 @@ project(kinhw LANGUAGES CXX VERSION 1.0)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CMAKE_CXX_COMPILER "g++")
+#set(CMAKE_CXX_COMPILER "g++")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 
 # add executables
@@ -19,10 +20,11 @@ find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${EIGEN3_INCLUDE_DIRS}
+    ${YAML_CPP_INCLUDE_DIRS}
 )
 target_link_libraries(${PROJECT_NAME} PRIVATE
     Eigen3::Eigen 
-    yaml-cpp
+    yaml-cpp::yaml-cpp
 )
 
 # Custom flags for Debug

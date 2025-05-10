@@ -1,6 +1,6 @@
 #include <yaml-cpp/yaml.h>
-#include <eigen3/Eigen/Dense>
-#include <eigen3/Eigen/src/Core/Matrix.h>
+#include <Eigen/Dense>
+#include <Eigen/src/Core/Matrix.h>
 #include <fstream>
 #include <functional>
 #include <filesystem>
@@ -16,7 +16,7 @@ int main() {
   double T_parallel = 1 / (4 * b);
   double T_perp = 1 / (2 * a + 2 * b);
 
-  YAML::Node config = YAML::LoadFile("./config/base.yaml");
+  YAML::Node config = YAML::LoadFile("./config/config.yaml");
 
   double nx = config["magnetic"]["nx"].as<double>();
   double ny = config["magnetic"]["ny"].as<double>();
@@ -27,7 +27,7 @@ int main() {
   Eigen::Vector3d n(nx, ny, nz);
 
   auto filePath = std::filesystem::current_path()//.parent_path() 
-    / "output" / "config.csv";
+    / "output" / "data.csv";
   std::ofstream fout(filePath);
   
   fout << "# t,nx,ny,nz\n";
